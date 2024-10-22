@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Editar Registro</h2>
+    <form action="{{ url_for('editar', id=id) }}" method="POST">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="{{ registro.fecha }}" required><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ registro.nombre }}" required><br><br>
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" value="{{ registro.apellido }}" required><br><br>
+
+        <label>Turno:</label>
+        <input type="radio" name="turno" value="Mañana" {% if registro.turno == 'Mañana' %}checked{% endif %}> Mañana
+        <input type="radio" name="turno" value="Tarde" {% if registro.turno == 'Tarde' %}checked{% endif %}> Tarde
+        <input type="radio" name="turno" value="Noche" {% if registro.turno == 'Noche' %}checked{% endif %}> Noche<br><br>
+
+        <label>Seminarios disponibles:</label><br>
+        <input type="checkbox" name="seminarios" value="Inteligencia Artificial" {% if 'Inteligencia Artificial' in registro.seminarios %}checked{% endif %}> Inteligencia Artificial<br>
+        <input type="checkbox" name="seminarios" value="Machine Learning" {% if 'Machine Learning' in registro.seminarios %}checked{% endif %}> Machine Learning<br>
+        <input type="checkbox" name="seminarios" value="Simulación con Arena" {% if 'Simulación con Arena' in registro.seminarios %}checked{% endif %}> Simulación con Arena<br>
+        <input type="checkbox" name="seminarios" value="Robótica Educativa" {% if 'Robótica Educativa' in registro.seminarios %}checked{% endif %}> Robótica Educativa<br><br>
+
+        <button type="submit">Guardar Cambios</button>
+
+    </form>
+    
+</body>
+</html>

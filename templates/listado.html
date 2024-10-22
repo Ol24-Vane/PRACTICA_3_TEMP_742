@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Inscritos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Listado de Inscritos</h2>
+        <a href="{{ url_for('index') }}" class="btn btn-warning">Nuevo Registro</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Turno</th>
+                    <th>Seminarios</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ registro.fecha }}</td>
+                    <td>{{ registro.nombre }}</td>
+                    <td>{{ registro.apellido }}</td>
+                    <td>{{ registro.turno }}</td>
+                    <td>{{ registro.seminarios }}</td>
+                    <td>
+                        <a href="{{ url_for('editar', id=loop.index0) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ url_for('eliminar', id=loop.index0) }}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

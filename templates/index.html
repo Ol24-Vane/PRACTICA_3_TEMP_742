@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro en Seminarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h3>{{ 'Editar Registro' if registro else 'Registro en Seminarios' }}</h3>
+        <form action="{{ url_for('editar', id=id) if registro else url_for('index') }}" method="POST">
+            <input type="date" name="fecha" value="{{ registro['fecha'] if registro else '' }}" required>
+            <input type="text" name="nombre" placeholder="Nombre" value="{{ registro['nombre'] if registro else '' }}" required>
+            <input type="text" name="apellido" placeholder="Apellido" value="{{ registro['apellido'] if registro else '' }}" required>
+
+            <div>
+                <label>Turno: </label> <br> <br>
+                <label><input type="radio" name="turno" value="Mañana" {{ 'checked' if registro and registro['turno'] == 'Mañana' else '' }}> Mañana</label>
+                <label><input type="radio" name="turno" value="Tarde" {{ 'checked' if registro and registro['turno'] == 'Tarde' else '' }}> Tarde</label>
+                <label><input type="radio" name="turno" value="Noche" {{ 'checked' if registro and registro['turno'] == 'Noche' else '' }}> Noche</label>
+            </div>
+
+            <div>
+                <label>Seminarios Disponibles:</label> <br> <br>
+                <label><input type="checkbox" name="seminarios" value="Inteligencia Artificial" 
+                {{ 'checked' if registro and 'Inteligencia Artificial' in registro['seminarios'] else '' }}> Inteligencia Artificial</label>
+                <label><input type="checkbox" name="seminarios" value="Machine Learning" 
+                {{ 'checked' if registro and 'Machine Learning' in registro['seminarios'] else '' }}> Machine Learning</label>
+                <label><input type="checkbox" name="seminarios" value="Simulación con Arena" 
+                {{ 'checked' if registro and 'Simulación con Arena' in registro['seminarios'] else '' }}> Simulación con Arena</label>
+                <label><input type="checkbox" name="seminarios" value="Robótica Educativa" 
+                {{ 'checked' if registro and 'Robótica Educativa' in registro['seminarios'] else '' }}> Robótica Educativa</label>
+            </div>
+
+            <button type="submit">{{ 'Guardar Cambios' if registro else 'Enviar Registro' }}</button>
+            
+        </form>
+    </div>
+</body>
+</html>
